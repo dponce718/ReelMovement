@@ -225,6 +225,152 @@ header {
 	}
 }
 
+
+
+// Global Section Styles
+
+section {
+    padding: 100px 0;
+    h2.section-heading {
+		font-size: 40px;
+		margin-top: 0;
+		margin-bottom: 15px;
+    }
+
+
+    h3.section-subheading {
+		font-size: 16px;
+		@include serif-font;
+		text-transform: none;
+		font-style: italic;
+		font-weight: 400;
+		margin-bottom: 75px;
+    }
+}
+
+@media(min-width:768px) {
+	section {
+		padding: 150px 0;
+	}
+}
+
+// Services Section
+
+.service-heading {
+	margin: 15px 0;
+	text-transform: none;
+}
+
+#services{
+
+	background: url('/assets/green.jpg');
+
+}
+
+
+// Portfolio Section
+
+#portfolio {
+    .portfolio-item {
+        margin: 0 0 15px;
+        right: 0;
+        .portfolio-link {
+            display: block;
+            position: relative;
+            max-width: 400px;
+            margin: 0 auto;
+            .portfolio-hover {
+                background: fade($brand-primary, 90%);
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+                transition: all ease 0.5s;
+                -webkit-transition: all ease 0.5s;
+                -moz-transition: all ease 0.5s;
+                &:hover {
+                    opacity: 1;
+                }
+                .portfolio-hover-content {
+                    position: absolute;
+                    width: 100%;
+                    height: 20px;
+                    font-size: 20px;
+                    text-align: center;
+                    top: 50%;
+                    margin-top: -12px;
+                    color: white;
+                    i {
+                        margin-top: -12px;
+                    }
+                    h3,
+                    h4 {
+                        margin: 0;
+                    }
+                }                
+            }            
+        }
+        .portfolio-caption {
+        	max-width: 400px;
+        	margin: 0 auto;
+        	background-color: white;
+        	text-align: center;
+        	padding: 25px;
+        	h4 {
+        		text-transform: none;
+        		margin: 0;
+        	}
+        	p {
+        		@include serif-font;
+        		font-style: italic;
+        		font-size: 16px;
+        		margin: 0;
+        	}
+        }
+    }
+    * {
+        z-index: 2;
+    }
+}
+
+@media(min-width:767px) {
+    #portfolio {
+        .portfolio-item {
+            margin: 0 0 30px;
+        }
+    }
+}
+
+
+
+//prices
+
+#prices{
+	
+	background: url('/assets/planks.jpg');
+	height: 500px;
+	margin-top: 20px;
+}
+
+.box {
+    
+    height: 500px;
+    padding: 30px 15px;
+    background: rgba(255,255,255,0.9);
+
+    
+           
+    
+}
+
+.col-centered{
+
+	float:none;
+	margin: 0 auto;
+}
+
+
+
 //footer
 
 footer {
@@ -255,7 +401,7 @@ a.active {
 }
 
 a {
-	color: black;
+	color: $brand-primary;
 	font-size:35px;
 }
 
@@ -266,4 +412,33 @@ a.active {
 	color: darken($gray, 10%);
 }
 }
+
+// Social Buttons
+
+ul.social-buttons {
+	margin-bottom: 0;
+	li {
+		a {
+			display: block;
+			background-color: $gray-darkest;
+			height: 40px;
+			width: 40px;
+			border-radius: 100%;
+			font-size: 20px;
+			line-height: 40px;
+			color: white;
+			outline: none;
+	        -webkit-transition: all 0.3s;
+	        -moz-transition: all 0.3s;
+	        transition: all 0.3s;
+	        &:hover,
+	        &:focus,
+	        &:active {
+				background-color: $brand-primary;
+	        }
+		}
+	}
+}
+
+
 
