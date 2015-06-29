@@ -14,6 +14,9 @@
 # Configure Using Gemfile
 # gem 'pg'
 #
+
+
+
 default: &default
   adapter: postgresql
   encoding: unicode
@@ -78,8 +81,4 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  database: ReelMovement_production
-  username: ReelMovement
-  password: <%= ENV['REELMOVEMENT_DATABASE_PASSWORD'] %>
+
