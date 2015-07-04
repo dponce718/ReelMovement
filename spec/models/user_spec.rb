@@ -18,6 +18,7 @@ RSpec.describe User, type: :model do
   it { should_not allow_value('user_at_foo.org').for(:email) }
   it { should_not allow_value('foo@bar_baz.com').for(:email) }
   it { should_not allow_value('foo@bar+baz.com').for(:email) }
+  it { should_not allow_value('foo@bar+baz..com').for(:email) }
   it { should have_secure_password }
 
   it "downcases an email before saving" do
