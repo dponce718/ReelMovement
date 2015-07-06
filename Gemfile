@@ -22,6 +22,8 @@ gem 'autoprefixer-rails'
 
 gem 'bcrypt'
 
+gem "paperclip", "~> 4.3"
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -60,4 +62,11 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
+
+group :production do
+
+gem 'puma',           '2.11.1'
+
+end
+
 
