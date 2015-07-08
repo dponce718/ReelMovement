@@ -10,9 +10,23 @@
 
 
     <div>
-    	<%= form_for @user, :url => users_path, :html => { :multipart => true } do |form| %>
-  <%= form.file_field :avatar %>
-<% end %>
+
+
+    	<%= form_for @user, :url => @user_path, :html => { :multipart => true } do |f| %>
+  		<%= f.file_field :avatar %>
+
+  		
+
+
+  <%= f.submit "submit", class: "btn btn-primary" %> <% end %>
+
+  <% if @user.avatar? %>
+
+  <span class=" label label-info"> pic </span>
+
+  <%= link_to @user.avatar_filename, @user.avatar.url %>
+
+  <% end %>
 
     </div>
 
