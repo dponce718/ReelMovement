@@ -9,12 +9,11 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6 }
 
 
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
   validates_attachment_content_type :avatar, :content_type => /^image\/(png|gif|jpeg|jpg)/
 
   validates_attachment_file_name :avatar, :matches => [/png\Z/, /jpe?g\Z/]
-  # Explicitly do not validate
-  do_not_validate_attachment_file_type :avatar
+  
 
   
 end
