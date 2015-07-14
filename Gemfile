@@ -24,7 +24,7 @@ gem 'bcrypt'
 
 gem 'aws-sdk', '~> 2'
 
-gem "paperclip", "~> 4.3"
+gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -52,7 +52,7 @@ group :development, :test do
 
   gem 'rspec-rails'
 
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', '~> 4.0'
 
   gem 'mocha'
 

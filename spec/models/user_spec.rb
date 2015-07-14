@@ -1,15 +1,13 @@
 require 'rails_helper'
+require 'factory_girl'
+
 
 RSpec.describe User, type: :model do
-	 let(:valid_attributes) {
-    {
-      name: "Jacqueline",
-      email: "jboltik@oolaabox.com",
-      password: "password",
-      password_confirmation: "password"
-    }
-  }
-  
+	 
+  before do
+    @user = FactoryGirl.create(:user)
+  end
+
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:email) }
   it { should validate_length_of(:name).is_at_most(50) }
@@ -21,12 +19,25 @@ RSpec.describe User, type: :model do
   it { should_not allow_value('foo@bar+baz..com').for(:email) }
   it { should have_secure_password }
 
-  it "downcases an email before saving" do
-      user = User.new(valid_attributes)
-      user.email = "JBOLTIK@OOLAABOX.COM"
-      expect(user.save).to be true
-      expect(user.email).to eq("jboltik@oolaabox.com")
+  describe "email uniqueness" do
+  it { should validate_uniqueness_of(:email) }
+  end
+
+  describe "downcase_email" do  
+    it "makes the email attribute lower case" do
+      @user = FactoryGirl.create(:user)
+      @user.email = "JBOLTIK@OOLAABOX.COM"
+      @user.email.downcase!
+      expect(@user.email).to eq("jboltik@oolaabox.com")
+    end
+    
+    it "downcases an email before saving" do
+      @user = FactoryGirl.create(:user)
+      @user.email = "JBOLTIK@OOLAABOX.COM"
+      expect(@user.save).to eq true
+      expect(@user.email).to eq("jboltik@oolaabox.com")
     end
   end
+end
 
 
