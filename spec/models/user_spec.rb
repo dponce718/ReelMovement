@@ -19,6 +19,7 @@ RSpec.describe User, type: :model do
   it { should_not allow_value('foo@bar+baz..com').for(:email) }
   it { should have_secure_password }
 
+
   describe "email uniqueness" do
   it { should validate_uniqueness_of(:email) }
   end
@@ -38,6 +39,7 @@ RSpec.describe User, type: :model do
       expect(@user.email).to eq("jboltik@oolaabox.com")
     end
   end
-end
+ end
+
 
 

@@ -28,4 +28,6 @@ ActiveRecord::Schema.define(version: 20150704170834) do
     t.datetime "avatar_updated_at"
   end
 
+  add_index "users", ["email"], name: "index_users_on_email", using: :btree
+
 end

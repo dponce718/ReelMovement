@@ -1,4 +1,7 @@
 require 'rails_helper'
+require 'sessions_helper'
+
+
 
 RSpec.describe SessionsController, type: :controller do
 
@@ -14,15 +17,17 @@ RSpec.describe SessionsController, type: :controller do
   	end
   end
 
+
   describe "POST 'create'" do
   		context "with correct credentials" do
 	
 		let!(:user) {User.create(name: "daniel", email: "danielcoolness@yahoo.com", password: "rowland1", password_confirmation: "rowland1")}
 
     	it "redirects to the user path" do
-    		post :create, email: "danielcoolness@yahoo.com", password: "rowland1"
+    		
+    		post :create, session: { email: "danielcoolness@yahoo.com", password: "rowland1" }
     		expect(response).to be_redirect
-    		expect(response).to redirect_to(users_path)
+    		expect(response).to redirect_to(user)
 		end
 
 		it "finds the user" do
@@ -42,16 +47,42 @@ RSpec.describe SessionsController, type: :controller do
 	 	end
 	  end  
 
-	  	it "sets the flash welcome message" do
-	  		post :create, email: "danielcoolness@yahoo.com", password: "rowland1"
-	  		expect(flash[:notice]).to eq("Welcome back!")
+
+	  	it "sets the flash success message" do
+        post :create, email: "danielcoolness@yahoo.com", password: "rowland1"
+        expect(flash[:success]).to eq("Thanks for logging in!")
+      end
+
+
+	  	shared_examples_for "denied login" do
+
+	  		it "renders new template" do
+	  			post :create, email: email, password: password
+	  			expect(response).to render_template('new')
+	  	end	
+
+	  	it "sets the flash danger message" do
+	  		post :create
+	  		expect(flash[:danger]).to eq("there was a problem logging in. Please check your email and password.")
 	  	end
+	  end			
 
 	  	context "with blank credentials" do
-	  		it "renders the new template" do
-	  		post :create
-	  		expect(response).to render_template('new')
+	  		let(:email) {""}
+	  		let(:password) {""}
+	  		it_behaves_like "denied login"
 	  	end	
+
+	  	context "with an incorrect password" do
+	  		let!(:user) {User.create(name: "daniel", email: "danielcoolness@yahoo.com", password: "rowland1", password_confirmation: "rowland1")}
+	  		let(:email) { user.email}
+	  		let(:password) {"incorrect"}
+	  		it_behaves_like "denied login"
+	  end
+	  context "with an incorrect email" do
+	  		let(:email) { "no@found.com"}
+	  		let(:password) {"incorrect"}
+	  		it_behaves_like "denied login"
 	  end
    	end
 end
