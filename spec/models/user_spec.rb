@@ -20,6 +20,7 @@ RSpec.describe User, type: :model do
   it { should have_secure_password }
 
 
+
   describe "email uniqueness" do
   it { should validate_uniqueness_of(:email) }
   end

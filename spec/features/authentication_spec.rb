@@ -11,7 +11,6 @@ describe "logging in" do
 			  click_button "Log in"
 
 			  expect(page).to have_content("Welcome back")
-			  expect(page).to have_content("Thanks for logging in")
 	end 
 
 

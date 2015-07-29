@@ -21,35 +21,46 @@ RSpec.describe SessionsController, type: :controller do
   describe "POST 'create'" do
   		context "with correct credentials" do
 	
-		let!(:user) {User.create(name: "daniel", email: "danielcoolness@yahoo.com", password: "rowland1", password_confirmation: "rowland1")}
-
+		@user = {:name =>"daniel", :email => "danielcoolness@yahoo.com", :password => "rowland1", :password_confirmation => "rowland1"}
+        
     	it "redirects to the user path" do
+
+    		@user = {:name =>"daniel", :email => "danielcoolness@yahoo.com", :password => "rowland1", :password_confirmation => "rowland1"}
+    		@user_created = User.create!(@user)
     		
     		post :create, session: { email: "danielcoolness@yahoo.com", password: "rowland1" }
     		expect(response).to be_redirect
-    		expect(response).to redirect_to(user)
+    		expect(response).to redirect_to('/users/'+@user_created.id.to_s)
 		end
 
 		it "finds the user" do
-			User.expects(:find_by).with({email: "danielcoolness@yahoo.com"}).returns(user)
-			post :create, email: "danielcoolness@yahoo.com", password: "rowland1"
+			User.expects(:find_by).with({email: "danielcoolness@yahoo.com"}).returns(@user)
+			post :create, session: { email: "danielcoolness@yahoo.com", password: "rowland1" }
 		end	
 
 		it "authenticates the user" do
-			User.stubs(:find_by).returns(user)
-			user.expects(:authenticate).once
-			post :create, email: "danielcoolness@yahoo.com", password: "rowland1"
+
+			@user = {:name =>"daniel", :email => "danielcoolness@yahoo.com", :password => "rowland1", :password_confirmation => "rowland1"}   	
+    		@user_created = User.create!(@user)
+    	
+			User.stubs(:find_by).returns(@user)
+			@user.expects(:authenticate).once
+			post :create,  session: { email: "danielcoolness@yahoo.com", password: "rowland1" }
 	 	end
 
 	 	it "sets the user_id in the session" do
-	 		post :create, email: "danielcoolness@yahoo.com", password: "rowland1"
-	 		expect(session[:user_id]).to eq(user.id)
+	 		
+	 		@user = {:name =>"daniel", :email => "danielcoolness@yahoo.com", :password => "rowland1", :password_confirmation => "rowland1"}
+    		@user_created = User.create!(@user)
+
+	 		post :create,  session: { email: "danielcoolness@yahoo.com", password: "rowland1" }
+	 		expect(session[:user_id]).to eq(@user.id)
 	 	end
 	  end  
 
 
 	  	it "sets the flash success message" do
-        post :create, email: "danielcoolness@yahoo.com", password: "rowland1"
+        post :create,  session: { email: "danielcoolness@yahoo.com", password: "rowland1" }
         expect(flash[:success]).to eq("Thanks for logging in!")
       end
 
@@ -57,12 +68,12 @@ RSpec.describe SessionsController, type: :controller do
 	  	shared_examples_for "denied login" do
 
 	  		it "renders new template" do
-	  			post :create, email: email, password: password
+	  			post :create, session: {email: email, password: password}
 	  			expect(response).to render_template('new')
 	  	end	
 
 	  	it "sets the flash danger message" do
-	  		post :create
+	  		post :create, session: {email:"incorrect@yahoo.com", password: "wrongpass"}
 	  		expect(flash[:danger]).to eq("there was a problem logging in. Please check your email and password.")
 	  	end
 	  end			
