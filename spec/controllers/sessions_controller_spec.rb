@@ -23,20 +23,23 @@ RSpec.describe SessionsController, type: :controller do
 	
 		@user = {:name =>"daniel", :email => "danielcoolness@yahoo.com", :password => "rowland1", :password_confirmation => "rowland1"}
         
-    	it "redirects to the user path" do
+    		it "redirects to the user path" do
 
     		@user = {:name =>"daniel", :email => "danielcoolness@yahoo.com", :password => "rowland1", :password_confirmation => "rowland1"}
     		@user_created = User.create!(@user)
     		
-    		post :create, session: { email: "danielcoolness@yahoo.com", password: "rowland1" }
+    		post :create, {email: "danielcoolness@yahoo.com", session: {  password: "rowland1" }}
     		expect(response).to be_redirect
     		expect(response).to redirect_to('/users/'+@user_created.id.to_s)
 		end
 
+
 		it "finds the user" do
 			User.expects(:find_by).with({email: "danielcoolness@yahoo.com"}).returns(@user)
-			post :create, session: { email: "danielcoolness@yahoo.com", password: "rowland1" }
+			
+			post :create, {email: "danielcoolness@yahoo.com", session: {  password: "rowland1" }}
 		end	
+
 
 		it "authenticates the user" do
 
@@ -53,14 +56,16 @@ RSpec.describe SessionsController, type: :controller do
 	 		@user = {:name =>"daniel", :email => "danielcoolness@yahoo.com", :password => "rowland1", :password_confirmation => "rowland1"}
     		@user_created = User.create!(@user)
 
-	 		post :create,  session: { email: "danielcoolness@yahoo.com", password: "rowland1" }
-	 		expect(session[:user_id]).to eq(@user.id)
+	 		 post :create,  {email: "danielcoolness@yahoo.com", session: {  password: "rowland1" }}
+	 		expect(session[:user_id]).to eq(@user_created.id)
 	 	end
 	  end  
 
 
 	  	it "sets the flash success message" do
-        post :create,  session: { email: "danielcoolness@yahoo.com", password: "rowland1" }
+	  	@user = {:name =>"daniel", :email => "danielcoolness@yahoo.com", :password => "rowland1", :password_confirmation => "rowland1"}
+    	@user_created = User.create!(@user)
+        post :create,  {email: "danielcoolness@yahoo.com", session: {  password: "rowland1" }}
         expect(flash[:success]).to eq("Thanks for logging in!")
       end
 
