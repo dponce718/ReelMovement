@@ -17,20 +17,20 @@ RSpec.describe SessionsController, type: :controller do
   	end
   end
 
+		before do
+  				@user = FactoryGirl.create(:user_daniel)
+  			end	
 
   describe "POST 'create'" do
   		context "with correct credentials" do
+
 	
-		@user = {:name =>"daniel", :email => "danielcoolness@yahoo.com", :password => "rowland1", :password_confirmation => "rowland1"}
-        
     		it "redirects to the user path" do
 
-    		@user = {:name =>"daniel", :email => "danielcoolness@yahoo.com", :password => "rowland1", :password_confirmation => "rowland1"}
-    		@user_created = User.create!(@user)
     		
     		post :create, {email: "danielcoolness@yahoo.com", session: {  password: "rowland1" }}
     		expect(response).to be_redirect
-    		expect(response).to redirect_to('/users/'+@user_created.id.to_s)
+    		expect(response).to redirect_to(@user)
 		end
 
 
@@ -43,9 +43,7 @@ RSpec.describe SessionsController, type: :controller do
 
 		it "authenticates the user" do
 
-			@user = {:name =>"daniel", :email => "danielcoolness@yahoo.com", :password => "rowland1", :password_confirmation => "rowland1"}   	
-    		@user_created = User.create!(@user)
-    	
+			
 			User.stubs(:find_by).returns(@user)
 			@user.expects(:authenticate).once
 			post :create,  session: { email: "danielcoolness@yahoo.com", password: "rowland1" }
@@ -53,18 +51,15 @@ RSpec.describe SessionsController, type: :controller do
 
 	 	it "sets the user_id in the session" do
 	 		
-	 		@user = {:name =>"daniel", :email => "danielcoolness@yahoo.com", :password => "rowland1", :password_confirmation => "rowland1"}
-    		@user_created = User.create!(@user)
 
 	 		 post :create,  {email: "danielcoolness@yahoo.com", session: {  password: "rowland1" }}
-	 		expect(session[:user_id]).to eq(@user_created.id)
+	 		expect(session[:user_id]).to eq(@user.id)
 	 	end
 	  end  
 
 
 	  	it "sets the flash success message" do
-	  	@user = {:name =>"daniel", :email => "danielcoolness@yahoo.com", :password => "rowland1", :password_confirmation => "rowland1"}
-    	@user_created = User.create!(@user)
+	  	
         post :create,  {email: "danielcoolness@yahoo.com", session: {  password: "rowland1" }}
         expect(flash[:success]).to eq("Thanks for logging in!")
       end
@@ -73,7 +68,7 @@ RSpec.describe SessionsController, type: :controller do
 	  	shared_examples_for "denied login" do
 
 	  		it "renders new template" do
-	  			post :create, session: {email: email, password: password}
+	  			post :create, session: {email: "email", password: "password"}
 	  			expect(response).to render_template('new')
 	  	end	
 
@@ -84,8 +79,8 @@ RSpec.describe SessionsController, type: :controller do
 	  end			
 
 	  	context "with blank credentials" do
-	  		let(:email) {""}
-	  		let(:password) {""}
+
+  			@user = FactoryGirl.attributes_for(:user_daniel, email: "", password: "")
 	  		it_behaves_like "denied login"
 	  	end	
 

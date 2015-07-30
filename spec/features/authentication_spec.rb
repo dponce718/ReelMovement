@@ -1,7 +1,8 @@
 require 'rails_helper'
 require 'factory_girl'
+require 'authentication_helper'
 
-describe "logging in" do
+describe "logging in and logging out" do
 
 	it "logs the user in and goes to his/her profile page" do
 		      @user = FactoryGirl.create(:user, email: "daniel@yahoo.com", password: "password")
@@ -23,4 +24,16 @@ describe "logging in" do
 		expect(page).to have_content("Please check your email and password")
 		expect(page).to have_field("email", with: "daniel@yahoo.com")
 	end	
+
+	it "logs out the user and send them to the root page" do
+		 @user = FactoryGirl.create(:user, email: "daniel@yahoo.com", password: "password")
+	     visit 'login'
+		 fill_in "email", with: "daniel@yahoo.com"
+       	 fill_in "Password", with: "password"
+		 click_button "Log in"
+		 click_on 'Account'
+	     click_on 'Log out'
+	     expect(page).to have_content("Join Now")
+	end	
+
 end

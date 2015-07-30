@@ -16,5 +16,22 @@ module SessionsHelper
   def logged_in?
     !current_user.nil?
   end  
+
+
+  def log_out
+    session.delete(:user_id)
+      @current_user = nil
+  end  
+
+  def require_user
+    if current_user
+        true
+    else
+      redirect_to signup_path, notice: "you must be logged in to access that page"     
+     end 
+  end  
+
+
+
 end
 
