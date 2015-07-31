@@ -4,10 +4,12 @@ Rails.application.routes.draw do
 
 root 'static_pages#home'
 
-get    'signup'  => 'users#new'
-get    'login'   => 'sessions#new'
-post   'login'   => 'sessions#create'
-delete 'logout'  => 'sessions#destroy'
+get    'signup'          => 'users#new'
+get    'login'           => 'sessions#new'
+get    'edit_profile'    => 'users#edit'
+post   'login'           => 'sessions#create'
+delete 'logout'          => 'sessions#destroy'
+
 
 resources :users
 resources :sessions, only: [:new, :create]

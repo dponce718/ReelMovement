@@ -86,6 +86,21 @@ h1, h2, h3, h4, h5, h6 {
 	padding: 20px 40px;
 }
 
+
+// forms
+
+.checkbox {
+  
+  span {
+    margin-left: 20px;
+    font-weight: normal;
+  }
+}
+#session_remember_me {
+  width: auto;
+  margin-left: 0;
+}
+
 // Custom Navigation Bar
 
 .navbar-default {
