@@ -51,11 +51,13 @@ module SessionsHelper
   end
 
 
-  def require_user
-    if current_user
-        true
-    else
-      redirect_to signup_path, notice: "you must be logged in to access that page"     
-     end 
-  end  
+  def redirect_back_or(default)
+    redirect_to(session[:forwarding_url] || default)
+    session.delete(:forwarding_url)
+  end
+
+   # Stores the URL trying to be accessed.
+  def store_location
+    session[:forwarding_url] = request.url if request.get?
+  end
 end

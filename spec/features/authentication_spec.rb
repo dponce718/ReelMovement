@@ -1,6 +1,6 @@
 require 'rails_helper'
 require 'factory_girl'
-require 'authentication_helper'
+
 
 describe "logging in and logging out" do
 
