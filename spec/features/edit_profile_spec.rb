@@ -42,7 +42,6 @@ describe "edit profile" do
 	     fill_in "Confirmation", with: "password1234"
 	     click_button 'Save changes'	
 	     expect(page).to have_content("Profile updated")
-	    @user.reload
 	     expect(@user.password).to eq ("password1234")
 
 	  end	
