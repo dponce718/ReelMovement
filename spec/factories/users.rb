@@ -6,7 +6,9 @@ FactoryGirl.define do
     		end
      	
 			password "password"
-			password_confirmation "password"  
+			password_confirmation "password" 
+      activated 'true'
+      activated_at 'Time.zone.now' 
 
 	factory :user_daniel do
     name "Daniel"

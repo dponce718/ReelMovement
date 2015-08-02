@@ -22,25 +22,29 @@ RSpec.describe User, type: :model do
 
 
   describe "email uniqueness" do
+
+    before do
+    @user = FactoryGirl.create(:user)
+  end
+
   it { should validate_uniqueness_of(:email) }
   end
 
   describe "downcase_email" do  
     it "makes the email attribute lower case" do
-      @user = FactoryGirl.create(:user)
       @user.email = "JBOLTIK@OOLAABOX.COM"
       @user.email.downcase!
       expect(@user.email).to eq("jboltik@oolaabox.com")
     end
     
     it "downcases an email before saving" do
-      @user = FactoryGirl.create(:user)
-      @user.email = "JBOLTIK@OOLAABOX.COM"
+          @user.email = "JBOLTIK@OOLAABOX.COM"
       expect(@user.save).to eq true
       expect(@user.email).to eq("jboltik@oolaabox.com")
     end
   end
- end
 
-
-
+    it "authenticated? should return false for a user with nil digest" do
+      expect(@user.authenticated?(:remember, '')).to be_falsey
+    end
+  end

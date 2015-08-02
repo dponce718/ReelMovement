@@ -9,10 +9,11 @@ get    'login'           => 'sessions#new'
 get    'edit_profile'    => 'users#edit'
 post   'login'           => 'sessions#create'
 delete 'logout'          => 'sessions#destroy'
-
+get     'change_password' => 'password_resets#new'
 
 resources :users
 resources :sessions, only: [:new, :create]
+resources :account_activations, only: [:edit]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
