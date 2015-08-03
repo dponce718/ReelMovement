@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessor :remember_token, :activation_token  
+  attr_accessor :remember_token, :activation_token, :reset_token  
 	 before_save { email.downcase! }
    before_create :create_activation_digest
 
@@ -18,6 +18,17 @@ class User < ActiveRecord::Base
   validates_attachment_file_name :avatar, :matches => [/png\Z/, /jpe?g\Z/]
   
 
+
+ def send_password_reset_email
+       UserMailer.password_reset(self).deliver_now
+   end
+
+#sets the password reset attributes
+   def create_reset_digest
+      self.reset_token = User.new_token
+      update_attribute(:reset_digest, User.digest(reset_token))
+      update_attribute(:reset_sent_at, Time.zone.now)
+   end
 
 # Returns the hash digest of the given string.
   def create_activation_digest
@@ -58,19 +69,30 @@ end
   def send_activation_email
        UserMailer.account_activation(self).deliver_now
    end
-       
+ 
+      
   #activates an account
   def activate
     self.update_attribute(:activated,    true)
     self.update_attribute(:activated_at, Time.zone.now)
    end 
 
-  private
+
+   def password_reset_expired?
+    reset_sent_at < 2.hours.ago
+  end
+
+
+
+private
   
   def create_activation_digest
       self.activation_token = User.new_token
       self.activation_digest = User.digest(activation_token)
   end  
+
+
+
 
 
 
