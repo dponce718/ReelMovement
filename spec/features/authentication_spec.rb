@@ -5,10 +5,10 @@ require 'factory_girl'
 describe "logging in and logging out" do
 
 	it "logs the user in and goes to his/her profile page" do
-		      @user = FactoryGirl.create(:user, email: "daniel@yahoo.com", password: "password")
+		   
 		      visit 'login'
-		      fill_in "email", with: "daniel@yahoo.com"
-			  fill_in "Password", with: "password"
+		      fill_in "email", with: "danielcoolness@yahoo.com"
+			  fill_in "Password", with: "rowland1"
 			  click_button "Log in"
 
 			  expect(page).to have_content("Welcome back")

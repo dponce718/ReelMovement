@@ -5,5 +5,6 @@ class ApplicationController < ActionController::Base
   add_flash_types :success, :my, :types
   include SessionsHelper
   include AuthenticationHelper
+  include PasswordResetsHelper
   
 end

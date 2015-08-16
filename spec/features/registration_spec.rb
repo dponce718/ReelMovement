@@ -16,6 +16,7 @@ require 'factory_girl'
 			click_button "Sign up"
 
 			expect(User.count).to eq(1) 
+			expect(page).to have_content "Please check your email to activate your account"
 
 		end	
 	end		

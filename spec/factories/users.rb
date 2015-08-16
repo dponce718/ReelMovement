@@ -14,7 +14,9 @@ FactoryGirl.define do
     name "Daniel"
 		email "danielcoolness@yahoo.com"
     password "rowland1"
-    password_confirmation "rowland1"  
+    password_confirmation "rowland1"
+    activated 'true'
+    activated_at 'Time.zone.now'   
 
 	end	
 end
