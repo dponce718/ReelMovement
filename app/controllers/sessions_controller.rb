@@ -4,11 +4,12 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: params[:session][:email])
-    if user && user.authenticate(params[:session][:password])
+    user = User.find_by(email: params[:email])
+    if user && user.authenticate(params[:password])
       if user.activated?
         log_in user
-        params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+        params[:session][:remember_me] == '1' ? remember(user) : forget(user) if params[:session]
+        flash[:success] = "Thanks for logging in!"
         redirect_back_or user
       else
         message  = "Account not activated. "

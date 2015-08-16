@@ -33,6 +33,8 @@ def create
   	end
 
   	def update
+     # puts params
+     # binding.pry
   		  @user = User.find_by_id(params[:id])
         if @user.update_attributes(user_params)
         flash[:success] = "Profile updated"

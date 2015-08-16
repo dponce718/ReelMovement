@@ -9,7 +9,7 @@ describe "edit profile" do
 		 @user = FactoryGirl.create(:user, email: "daniel@yahoo.com", password: "password")
 	     visit 'login'
 		 fill_in "email", with: "daniel@yahoo.com"
-       	 fill_in "Password", with: "password"
+       	 fill_in "password", with: "password"
 		 click_button "Log in"
 		 click_on 'Account'
 	     click_on 'Edit'
@@ -20,7 +20,7 @@ describe "edit profile" do
 		 @user = FactoryGirl.create(:user, email: "daniel@yahoo.com", password: "password")
 	     visit 'login'
 		 fill_in "email", with: "daniel@yahoo.com"
-       	 fill_in "Password", with: "password"
+       	 fill_in "password", with: "password"
 		 click_button "Log in"
 		 click_on 'Account'
 	     click_on 'Edit'
@@ -30,20 +30,20 @@ describe "edit profile" do
 
 	 it "successful edit" do
 	 	@user = FactoryGirl.create(:user, email: "daniel@yahoo.com", password: "password")
+	 	old_password_digest = @user.password_digest
 	     visit 'login'
 		 fill_in "email", with: "daniel@yahoo.com"
-       	 fill_in "Password", with: "password"
+       	 fill_in "password", with: "password"
 		 click_button "Log in"
 		 click_on 'Account'
 	     click_on 'Edit'
 	     fill_in "Name", with: "daniel"
 	     fill_in "Email", with: "daniel@yahoo.com"
-	     fill_in "Password", with: "password1234"
-	     fill_in "Confirmation", with: "password1234"
+	     fill_in "user_password", with: "password1234"
+	     fill_in "user_password_confirmation", with: "password1234"
 	     click_button 'Save changes'	
 	     expect(page).to have_content("Profile updated")
-	     expect(@user.password).to eq ("password1234")
-
+	     expect(@user.reload.password_digest).not_to eq old_password_digest
 	  end	
 
 	  it "requires user to be logged in " do

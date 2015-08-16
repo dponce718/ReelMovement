@@ -5,10 +5,10 @@ require 'factory_girl'
 describe "logging in and logging out" do
 
 	it "logs the user in and goes to his/her profile page" do
-		   
+		     @user = FactoryGirl.create(:user, email:  "danielcoolness@yahoo.com", password: "rowland1", password_confirmation: "rowland1")
 		      visit 'login'
 		      fill_in "email", with: "danielcoolness@yahoo.com"
-			  fill_in "Password", with: "rowland1"
+			  fill_in "password", with: "rowland1"
 			  click_button "Log in"
 
 			  expect(page).to have_content("Welcome back")
@@ -18,10 +18,10 @@ describe "logging in and logging out" do
 	it "displays the email address in the event of a failed log in" do
 		visit 'login'
 		fill_in "email", with: "daniel@yahoo.com"
-		fill_in "Password", with: "incorrect"
+		fill_in "password", with: "incorrect"
 		click_button "Log in"
 
-		expect(page).to have_content("Please check your email and password")
+		expect(page).to have_content("Invalid email/password combination")
 		expect(page).to have_field("email", with: "daniel@yahoo.com")
 	end	
 
@@ -29,7 +29,7 @@ describe "logging in and logging out" do
 		 @user = FactoryGirl.create(:user, email: "daniel@yahoo.com", password: "password")
 	     visit 'login'
 		 fill_in "email", with: "daniel@yahoo.com"
-       	 fill_in "Password", with: "password"
+       	 fill_in "password", with: "password"
 		 click_button "Log in"
 		 click_on 'Account'
 	     click_on 'Log out'
