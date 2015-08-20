@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
-source 'https://code.stripe.com'
 
+#require a specific version of ruby
+
+ruby '2.2.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
@@ -28,6 +30,9 @@ gem 'bcrypt'
 gem 'aws-sdk', '~> 2'
 
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
+
+
+#use stripe for e-commerce payments
 
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'\
 
