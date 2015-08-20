@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+source 'https://code.stripe.com'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -28,7 +29,10 @@ gem 'aws-sdk', '~> 2'
 
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 
-gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'\
+
+gem 'paper_trail',  '~> 4.0.0'
+
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

@@ -19,6 +19,7 @@ resources :users
 resources :sessions, only: [:new, :create]
 resources :account_activations, only: [:edit]
 resources :password_resets,     only: [:new, :create, :edit, :update]
+resources :subscriptions, only: [:index, :new, :create]
 
 
   # The priority is based upon order of creation: first created -> highest priority.
