@@ -29,6 +29,9 @@ gem 'bcrypt'
 
 gem 'aws-sdk', '~> 2'
 
+#figaro for securely managing credentials
+gem 'figaro'
+
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 
 
