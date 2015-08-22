@@ -23,6 +23,8 @@ resources :account_activations, only: [:edit]
 resources :password_resets,     only: [:new, :create, :edit, :update]
 resources :subscriptions, only: [:index, :new, :create]
 resources :charges
+resources :purchases, only: [:show]
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
