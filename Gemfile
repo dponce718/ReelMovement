@@ -32,6 +32,13 @@ gem 'aws-sdk', '~> 2'
 #figaro for securely managing credentials
 gem 'figaro'
 
+# ad activeadmin to generate administrators
+gem 'activeadmin', github: 'activeadmin'
+
+#authentication gem
+
+gem 'devise'
+
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 
 
