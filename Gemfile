@@ -66,6 +66,8 @@ group :development, :test do
 
   gem 'factory_girl_rails', '~> 4.5.0'
 
+  gem 'letter_opener'
+
 end
 
 
