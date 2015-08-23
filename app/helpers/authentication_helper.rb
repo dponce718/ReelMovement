@@ -1,10 +1,10 @@
 module AuthenticationHelper
 
 	#for controller
-	def sign_in(user) 
-		controller.stub(:current_user).and_return(user)
-		controller.stub(:user_id).and_return(user.id)
-	end
+	#def sign_in(user) 
+	#	controller.stub(:current_user).and_return(user)
+	#	controller.stub(:user_id).and_return(user.id)
+	#end
 
 	#for authentication spec
 	def feature_sign_in(user, options={})
