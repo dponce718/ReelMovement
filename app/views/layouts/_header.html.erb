@@ -46,10 +46,10 @@
 
                     </ul> 
 
-                        </li> <% else %> <li><%= link_to "Log in", login_path %></li>
+                        </li> <% else %> <li><%= link_to "Log in", new_user_session_path %></li>
 
                         <li>
-                         <%= link_to "Join Now", new_user_path(:id), class: "page-scroll" %> 
+                         <%= link_to "Join Now", new_user_registration_path, class: "page-scroll" %> 
                         </li>
 
                         <li>

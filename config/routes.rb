@@ -2,17 +2,18 @@
 Rails.application.routes.draw do
 
 
+  devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 root 'static_pages#home'
 
 get    'signup'          => 'users#new'
-get    'login'           => 'sessions#new'
+get    'login'           => 'devise/sessions#new'
 get    'edit_profile'    => 'users#edit'
 post   'login'           => 'sessions#create'
 delete 'logout'          => 'sessions#destroy'
 get    'change_password' => 'password_resets#new'
-get 'plan'               => 'static_pages#plan'
+get     'plan'           => 'static_pages#plan'
 
 
 get 'password_resets/new'
