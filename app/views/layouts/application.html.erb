@@ -29,7 +29,12 @@ $(function(){
 <div class="alert alert-<%= message_type %>"><%= message %></div> <% end %>
 
 
+
+
 <%= yield %>
+
+<p class="notice"> <%= notice %> </p>
+<p class="alert"> <%= alert %> </p>
 
 <%= render 'layouts/footer' %>
 
