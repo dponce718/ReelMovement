@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 root 'static_pages#home'
 
-get    'signup'          => 'users#new'
+get    'signup'          => 'devise/registrations#create'
 get    'login'           => 'devise/sessions#new'
 get    'edit_profile'    => 'users#edit'
 post   'login'           => 'sessions#create'
@@ -21,9 +21,7 @@ get 'password_resets/new'
   get 'password_resets/edit'
 
 resources :users
-resources :sessions, only: [:new, :create]
 resources :account_activations, only: [:edit]
-resources :password_resets,     only: [:new, :create, :edit, :update]
 resources :subscriptions, only: [:index, :new, :create]
 resources :charges
 resources :purchases, only: [:show]
