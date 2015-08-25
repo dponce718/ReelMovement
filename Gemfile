@@ -25,7 +25,6 @@ gem 'faker',  '~> 1.4.2'
 
 gem 'autoprefixer-rails'
 
-gem 'bcrypt'
 
 gem 'aws-sdk', '~> 2'
 
@@ -47,7 +46,6 @@ gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'\
 
 gem 'paper_trail',  '~> 4.0.0'
-
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -88,8 +86,6 @@ group :test do
   gem 'mocha'
 
   gem 'shoulda'
-
-  gem 'email_spec', '~> 1.5.0'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
