@@ -7,17 +7,17 @@ FactoryGirl.define do
      	
 			password "password"
 			password_confirmation "password" 
-      activated 'true'
-      activated_at 'Time.zone.now' 
+  end    
 
 	factory :user_daniel do
     name "Daniel"
 		email "danielcoolness@yahoo.com"
     password "rowland1"
-    password_confirmation "rowland1"
-    activated 'true'
-    activated_at 'Time.zone.now'   
+    password_confirmation "rowland1"   
+  end	
 
-	end	
-end
+  factory :user_log_in do
+        email { Faker::Internet.email }
+        password { Devise.friendly_token.first(8) }
+  end      
 end

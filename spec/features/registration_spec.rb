@@ -10,13 +10,13 @@ require 'factory_girl'
 			click_link "Join Now"
 
 			fill_in "Name", with: "daniel"
-			fill_in "email", with: "danielcoolness@yahoo.com"
-			fill_in "password", with: "batman1234"
-			fill_in "password (again)", with: "batman1234"
+			fill_in "Email", with: "danielcoolness@yahoo.com"
+			fill_in "Password", with: "batman1234"
+			fill_in "Password confirmation", with: "batman1234"
 			click_button "Sign up"
 
 			expect(User.count).to eq(1) 
-			expect(page).to have_content "Please check your email to activate your account"
+			expect(page).to have_content "Welcome! You have signed up successfully "
 
 		end	
 	end		
