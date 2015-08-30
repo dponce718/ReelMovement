@@ -50,7 +50,7 @@ describe "edit profile" do
 	  it "requires user to be logged in " do
 	  	@user = FactoryGirl.create(:user, email: "daniel@yahoo.com", password: "password")
 	  	visit 'edit_profile'
-	  	expect(page).to have_content("Please log in")
+	  	expect(page).to have_content("You need to sign in or sign up before continuing")
 	  end	
 
 
