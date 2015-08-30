@@ -13,8 +13,17 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) << :name
   end
 
-   def after_sign_in_path_for(resource)
-    # return the path based on resource
-  end
   
+  def after_sign_in_path_for(resource)
+      if resource.respond_to? :profil  
+
+      if current_user.profil.nil?        
+          new_user_profil_url(current_user) 
+      else                               
+         user_path                         
+      end                                
+        else                                 
+         super                              
+      end                                  
+    end                      
 end
